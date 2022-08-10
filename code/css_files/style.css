@@ -209,6 +209,7 @@ optgroup {
 }
 
 table {
+    border: none;
     border-collapse: collapse;
     border-spacing: 0
 }
@@ -832,7 +833,6 @@ a:hover {
 .main-content table th,
 .main-content table td {
     padding: 0.5rem 1rem;
-    border: 1px solid #e9ebec
 }
 
 .main-content dl {
