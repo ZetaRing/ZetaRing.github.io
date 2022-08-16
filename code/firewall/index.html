@@ -17,39 +17,39 @@
 
 <main id="content" class="main-content" role="main">
 <h2>Announcement</h2>
-<p>I can not go to far due to the confidentiality agreement. Also, I skipped some not critical steps and details. This page may be confusing without details about the scenario. Please contact me if I can do anything to help you understand this algorithm. </p>
+<p>I can not go too far due to the confidentiality agreement. Also, I skipped some steps and details which are not critical. This page may be confusing without details about the scenario. Please contact me if I can do anything to help you understand this algorithm. </p>
 <h2>Background & Obstacles</h2>
 <p>1. The firewall rules in the datacenter is not unified. There are some invalid firewall rules and some teams will deploy their firewall rules casually.</p>
 <p>2. Hackers will change the firewall rules in several machines, which will be hard to monitor such behavior since there are so many rules.</p>
 <p>3. Firewall rules are dynamic. Applications will change firewall rules now and then.</p>
-<p>4. There are more then one million firewall rules, manually monitoring is impratical.</p>
+<p>4. There are more then one million firewall rules. Manually monitoring is impratical.</p>
 <p>5. No one understand all firewall rules in the datacenter. It is hard to label all the firewall rules.</p>
 <h2>Target</h2>
 <p>We need to design a method to detect abnormal firewall rules effectively.</p>
 <h2>Solution</h2>
-<p>I proposed three assumptions for this scenario. These three assumptions reduce the complexity of the problem significantly, leading to a pratical solution.</p>
+<p>I proposed two assumptions for this scenario. These two assumptions reduce the complexity of the problem significantly, leading to a pratical solution.</p>
 <h3>- Assumption</h3>
-<p>1. Most firewall rules are configured reasonably.</p>
+<p>1. Most firewall rules are configured reasonably. (Most people are good people :)</p>
 <p>2. A group of firewall rules should serve for the same purpose. A single firewall rule can not satisfy the requirement a service.</p>
 <h3>- Deduction</h3>
 <p>Here is the key point.</p>
 <p><b>1. Firewall rules serving for the same purpose should have same spatial distribution in the datacenter.</b></p>
 <p><b>2. If a firewall rule is confirmed to be configured reasonably, another firewall rule that share the same spatial distribution should also be considered as configured reasonably.</b></p>
 <h3>- Conclusion</h3>
-<p>We can use unsupervised learning algorithm to automatically clustering firewall rules into groups. Then we only need to label the group is enough.</p>
+<p>We can use unsupervised learning algorithm to automatically clustering firewall rules into groups based on their spatial distribution. After that, labeling the group is enough.</p>
 <h2>Algorithm & Result</h2>
 <h3>- Data representation</h3>
-<p>Each firewall rule will be represented by a vector which describing its spatial distribution.</p>
+<p>Each firewall rule will be represented by a vector which describes its spatial distribution.</p>
 <img src="./vector.png">
 <p>Each element in the vector represents how many machines have this firewall rule in this location.</p>
-<p>(Location is defined by machines' physical group)</p>
+<p>(Location is defined by machines' physical group. Each location has more than one machine.)</p>
 <h3>- Clustering</h3>
 <p>By calculating the similarity of vectors, firewall rules can be clustered unsupervised.</p>
 <img src="./cluster.png">
-<p>Result of similarity matrix. Yellow Triangles in the diagonal corresponding to normal firewall rules. Red circle represents outliers.</p>
+<p>Result of similarity matrix. Yellow Triangles in the diagonal corresponding to normal firewall rules. The red circle in the right picture represents outliers.</p>
 <img src="./sim_mat.png">
 <h3>- Result</h3>
-<p>I did not use names of firewall rules in the algorithm. But firewall rules with similarity names can clustered into same group in the result. This proved that abnormal firewall rules can be detected by spatial distribution.</p>
+<p>I did not use names of firewall rules in the algorithm. But firewall rules with similarity names can clustered into same group in the result. This proves that 1) normal firewall rules can be discovered in the form of group. 2) abnormal firewall rules can be detected since they will be outliers.</p>
 <img src="./result.png">
 
 <footer class="site-footer">
