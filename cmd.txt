@@ -1,0 +1,3 @@
+docker network create labnet
+docker-compose build
+docker-compose up -d
