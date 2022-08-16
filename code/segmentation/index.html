@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Zishuo Zheng</title>
+<link rel="preconnect" href="https://fonts.gstatic.com/">
+<link rel="preload" href="../css_files/css" as="style" type="text/css" crossorigin="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#157878">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="../css_files/style.css">
+</head>
+
+<body>
+  <header class="page-header" role="banner">
+    <h1 class="project-name">Semantic Segmentation</h1>    
+  </header>
+
+<main id="content" class="main-content" role="main">
+<h2>Demo on Teams</h2>
+<video width="640" height="480" controls>
+<source src="./video.mp4" type="video/mp4">
+</video>
+
+<h2>Target & Obstacle</h2>
+<p>We need to improve the accuracy of person segmentation neural network.<br></p>
+<p>1. Model size and running time are strictly restrained. We need to increase IoU with a little cost.<br></p>
+<p>2. Original model is well-trained and finely modified. We do not have enough time and manpower to finely modify a model. As a consequence, Our refinement method needs to be efficient enough to provide IoU improvement even without fine tuning parameters.   <br></p>
+
+<h2>Knowledge Distillation</h2>
+<p></p>
+<img src="./kd.png">
+<p>In Knowledge distillation (KD), the teacher is MobileNetV2 2.0 and the student is MobileNetV2 0.5</p>
+<img src="./kd_result.png">
+
+<h2>Cross Knowledge Distillation</h2>
+<p>We proposed cross knowledge distillation inspired by KD. In cross KD, the student network has to learn how to generate and handle the same feature extracted by the teacher network.</p>
+<img src="./cross_kd.png">
+<p>We found that cross KD can accelerate the speed of convergence significantly. However, the improvement in IoU is subtle under this scenario.</p>
+
+<h2>Adaptive Scale</h2>
+<p>(We use new dataset here because more labeled data are available. Thus, IoU maybe a litte lower.)</p>
+<p>Inspired by squeeze and excitation networks(J. Hu, L. Shen and G. Sun, CVPR, 2018), I proposed adaptive scale.</p>
+<h4> - Squeeze & Excitation</h4>
+<p>Local Scale: extract global feature and multiply to itself.</p>
+<img src="./local_scale.png">
+<h4>- Fixed Scale</h4>
+<p>In order to reduce computional cost, scale parameters are fixed and deriver from training.</p>
+<img src="./fixed_scale.png" height="300" >
+<h4>- Global Adaptive Scale</h4>
+<img src="./adaptive_scale.png">
+<p>To balance performance and cost, we apply global adaptive scale on decoder and fixed scale on encoder.</p>
+<h4>- Result</h4>
+<p>Our method out-performed raw network with a little cost and no fine-tuning.</p>
+<img src="./scale_result.png">
+
+<h2>Pruning</h2>
+<p>On red circle, we will prune the values in weight matrix which less than a threshold to zero. For green circle, no pruning and let the network "recover" during training.</p>
+<img src="./lr.png">
+<p>Training on 4 x Tesla P40 for 117 hours.</p>
+<p>Sparsity: 0% -> ~40%</p>
+<img src="./sparsity.png">
+<p>IoU on image: 95.48% -> 95.32%</p>
+
+<footer class="site-footer">
+<span class="site-footer-credits">This page was built based on <a href="https://pages.github.com/" target="_blank" style="color: blue;"><u>GitHub Pages</u></a> project.</span>
+</footer>
+</main>
+</body></html>
