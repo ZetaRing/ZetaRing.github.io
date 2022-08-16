@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Zishuo Zheng</title>
+<link rel="preconnect" href="https://fonts.gstatic.com/">
+<link rel="preload" href="../css_files/css" as="style" type="text/css" crossorigin="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#157878">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="../css_files/style.css">
+</head>
+
+<body>
+  <header class="page-header" role="banner">
+    <h1 class="project-name">3D Reconstruction from Monocular Images</h1>    
+  </header>
+
+<main id="content" class="main-content" role="main">
+<h2>Background</h2>
+<p>PlaneNet (C. Liu, J. Yang et al., CVPR, 2018) is a successful tool for 3D Reconstruction from monocular images, especially for indoor scenarios. However, it is commonly agreed that deep neural network is computational expensive. Here we want to compress PlaneNet for pratical industrial usage.</p>
+<p>Learn more about PlaneNet: <a href="http://art-programmer.github.io/planenet.html" target="_blank" style="color: blue;"><u>http://art-programmer.github.io/planenet.html</u></a></p>
+<h2>Method</h2>
+<p>We almost changed all components in the PlaneNet including backbone, pyramid pooling and implementation of convolution.</p>
+<p>Original network structure from (C. Liu, J. Yang et al., CVPR, 2018): </p>
+<img src="./original.png">
+<p>Our strucure:</p>
+<img src="./structure.png">
+<p>Decoder:</p>
+<img src="./decoder.png">
+<h2>Result</h2>
+<p>For indoor scenario, most objects are artifical. There are always planes in artifical objects like desk, wall and screen. As a result, here we will focusing on the accuracy of depth estimation of plane areas.</p>
+<img src="./table.png">
+<p>As we can learn from the table, the accuracy of depth estimation drops a little while computation cost is largely reduced.</p>
+<img src="./result.png">
+<p>Our work even out-performanced PlaneNet in some cases as showed above.</p>
+<p></p>
+
+
+<footer class="site-footer">
+<span class="site-footer-credits">This page was built based on <a href="https://pages.github.com/" target="_blank" style="color: blue;"><u>GitHub Pages</u></a> project.</span>
+</footer>
+</main>
+</body></html>
