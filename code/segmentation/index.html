@@ -21,42 +21,44 @@
 </video>
 
 <h2>Target & Obstacle</h2>
-<p>We need to improve the accuracy of person segmentation neural network.<br></p>
-<p>1. Model size and running time are strictly restrained. We need to increase IoU with a little cost.<br></p>
-<p>2. Original model is well-trained and finely modified. We do not have enough time and manpower to finely modify a model. As a consequence, Our refinement method needs to be efficient enough to provide IoU improvement even without fine tuning parameters.   <br></p>
+<p>Teams and Skype teams in Redmond have developed a neural network for semantic segmentation, which can segment a person out of the background in real-time. This model is designed for running on personal computers and mobile phones. We need to improve the performance of this model.</p>
+<p>1. Model size and running time are strictly restrained. We need to increase IoU under limited computational resources.<br></p>
+<p>2. Original model is well-trained and finely modified. We do not have enough time and workforce to finetune a model. Consequently, our refinement method needs to be efficient enough to provide IoU improvement even without carefully selective parameters.<br></p>
+<p>3. Original model is well-designed and highly compressed. We do not have much redundancy.</p>
 
 <h2>Knowledge Distillation</h2>
-<p></p>
+<p>In Knowledge distillation (KD) (Hinton et al., NISP, 2014), the teacher is MobileNetV2 (Sandler et al., CVPR, 2018) with a width multiplier of 2.0, and the student is MobileNetV2 with a width multiplier of 0.5.</p>
 <img src="./kd.png">
-<p>In Knowledge distillation (KD), the teacher is MobileNetV2 2.0 and the student is MobileNetV2 0.5</p>
+<p>Results are displayed below. X-axis: iterations. Y-axis: IoU on the test set.</p>
 <img src="./kd_result.png">
 
 <h2>Cross Knowledge Distillation</h2>
-<p>We proposed cross knowledge distillation inspired by KD. In cross KD, the student network has to learn how to generate and handle the same feature extracted by the teacher network.</p>
+<p>We proposed cross-knowledge distillation (cross KD), inspired by KD. In cross KD, the student network is compelled to learn how to generate and decode the same feature extracted by the teacher network.</p>
 <img src="./cross_kd.png">
-<p>We found that cross KD can accelerate the speed of convergence significantly. However, the improvement in IoU is subtle under this scenario.</p>
+<p>We found that cross KD can accelerate the speed of convergence significantly. However, the improvement of IoU is subtle under this scenario.</p>
 
 <h2>Adaptive Scale</h2>
-<p>(We use new dataset here because more labeled data are available. Thus, IoU maybe a litte lower.)</p>
-<p>Inspired by squeeze and excitation networks(J. Hu, L. Shen and G. Sun, CVPR, 2018), I proposed adaptive scale.</p>
-<h4> - Squeeze & Excitation</h4>
+<p>Inspired by the squeeze and excitation network (Hu et al., CVPR, 2018), we proposed the adaptive scale.</p>
+<h4> - Squeeze & Excitation (Hu et al., CVPR, 2018)</h4>
 <p>Local Scale: extract global feature and multiply to itself.</p>
 <img src="./local_scale.png">
 <h4>- Fixed Scale</h4>
-<p>In order to reduce computional cost, scale parameters are fixed and deriver from training.</p>
+<p>Scale parameters are fixed to reduce the computational cost.</p>
 <img src="./fixed_scale.png" height="300" >
 <h4>- Global Adaptive Scale</h4>
 <img src="./adaptive_scale.png">
-<p>To balance performance and cost, we apply global adaptive scale on decoder and fixed scale on encoder.</p>
+<p>To balance performance and cost, we apply the global adaptive scale on the decoder and the fixed scale on the encoder.</p>
 <h4>- Result</h4>
-<p>Our method out-performed raw network with a little cost and no fine-tuning.</p>
+<p>Our method outperformed the raw network with little cost and no fine-tuning.</p>
+<p>Input image size: 90x160x3</p>
 <img src="./scale_result.png">
+<p>(We used a new dataset here because more labeled data were available.)</p>
 
 <h2>Pruning</h2>
-<p>On red circle, we will prune the values in weight matrix which less than a threshold to zero. For green circle, no pruning and let the network "recover" during training.</p>
+<p>On the red circle, we will prune the elements in the weight matrix. No pruning will occur for the green circle, and the network can "recover" during training.</p>
 <img src="./lr.png">
-<p>Training on 4 x Tesla P40 for 117 hours.</p>
-<p>Sparsity: 0% -> ~40%</p>
+<p>This network was trained on 4 x Tesla P40 for 117 hours.</p>
+<p>Weight sparsity: 0% -> ~40%</p>
 <img src="./sparsity.png">
 <p>IoU on image: 95.48% -> 95.32%</p>
 
