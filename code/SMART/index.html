@@ -15,15 +15,20 @@
   </header>
 
 <main id="content" class="main-content" role="main">
-<h2>Resources</h2>
-<p></p>
-<p>PathNet paper: <a href="https://arxiv.org/abs/1701.08734" target="_blank" style="color: blue;"><u>https://arxiv.org/abs/1701.08734</u></a></p>
-<p>Original source code: <a href="https://github.com/Wind-Wing/DetaNet" target="_blank" style="color: blue;"><u>https://github.com/Wind-Wing/DetaNet</u></a></p>
-<p>Published source code: <a href="https://github.com/Wind-Wing/SMART" target="_blank" style="color: blue;"><u>https://github.com/Wind-Wing/SMART</u></a></p>
-<p>(DetaNet and SMART are the same project but sorted and renamed.)</p>
+<h2>In Brief</h2>
+<p>In 2017, Google published a paper, “PathNet" (Chrisantha Fernando et al., 2017). In this model, a well-trained network can be reused for new tasks. It permits parameter reuse without catastrophic forgetting. Using a genetic algorithm, PathNet can discover which part of the network to reuse.</p>
+<p>Inspired by PathNet, we go further in transfer learning and artificial general intelligence (AGI). Instead of using a pre-defined network like PathNet, we allow the neural network to "grow up" (evolution) on an environment (dataset) from a "seed" (initial network) under the limitation of "gene pool" (pre-defined framework and components).</p>
+<p>We combined PathNet with network synthesis to achieve SMART. SMART can grow forever and be compatible with all the tasks in theory. Thus, we investigate whether such growth has a boundary. We use MNIST to prove that network can be adapted to new tasks without extra building blocks, which means convergence.</p>
 
 <h2>Manuscript</h2>
 <iframe src="./paper.pdf" height="1200px" width="100%"></iframe>
+
+<h2>Resources</h2>
+<p></p>
+<p>PathNet paper: <a href="https://arxiv.org/abs/1701.08734" target="_blank" style="color: blue;"><u>https://arxiv.org/abs/1701.08734</u></a></p>
+<p>DetaNet source code: <a href="https://github.com/Wind-Wing/DetaNet" target="_blank" style="color: blue;"><u>https://github.com/Wind-Wing/DetaNet</u></a></p>
+<p>SMART source code: <a href="https://github.com/Wind-Wing/SMART" target="_blank" style="color: blue;"><u>https://github.com/Wind-Wing/SMART</u></a></p>
+<p>(DetaNet and SMART are the same project but the later one has been sorted and renamed. Commit history is in project DetaNet.)</p>
 
 <footer class="site-footer">
 <span class="site-footer-credits">This page was built based on the <a href="https://pages.github.com/" target="_blank" style="color: blue;"><u>GitHub Pages</u></a> project.</span>
