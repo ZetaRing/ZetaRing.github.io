@@ -16,44 +16,50 @@
   </header>
 
 <main id="content" class="main-content" role="main">
-<h2>Announcement</h2>
-<p>I can not go too far due to the confidentiality agreement. Also, I skipped some steps and details which are not critical. This page may be confusing without more information about the scenario. Please get in touch with me if I can do anything to help you understand this algorithm.</p>
 <h2>Background & Obstacle</h2>
-<p>1. The firewall rules in the datacenter are not unified. There are some invalid firewall rules. And some teams will casually deploy their firewall rules.</p>
-<p>2. There are more than one million firewall rules. Manually monitoring is impractical.</p>
-<p>3. No one understands all firewall rules in the datacenter. It is hard to label all the firewall rules.</p>
+<p>1. There are more than one million firewall rules. Manually monitoring is impractical.</p>
+<p>2. The firewall rules in the datacenter are not unified. 
+<p>&emsp; 1) There are some invalid firewall rules.</p>
+<p>&emsp; 2) Some teams will casually deploy their firewall rules.</p>
+<p>&emsp; 3) No one understands all firewall rules in the datacenter. It is hard to label all the firewall rules.</p>
+<p>3. Firewall rules are dynamic. Applications will change firewall rules now and then.</p>
 <p>4. Hackers will change the firewall rules in several machines, making monitoring such behavior challenging since so many rules exist.</p>
-<p>5. Firewall rules are dynamic. Applications will change firewall rules now and then.</p>
+
 <h2>Target</h2>
 <p>We need to design a method to detect abnormal firewall rules effectively.</p>
+
 <h2>Solution</h2>
-<p>I proposed two assumptions for this scenario. These two assumptions significantly reduce the problem's complexity, leading to a practical solution.</p>
+<h3>- Observation</h3>
+<p>Machines in the datacenter can be described as virtual groups. As shown below, circles with different colors are different virtual groups. Each group has several machines, represented by triangles. Here we get the spatial distribution of machines.</p>
+<p>However, virtual groups do not correspond to functional groups. Different teams can use machines in the same virtual groups for various purposes, represented by triangles with different colors. We call it the "functional distribution of machines."</p>
+<p>Unfortunately, we have no assessment of the functional distribution of machines. Only spatial distributions are available. In addition, we can figure out all the firewall rules deployed in each machine.</p>
+<img src="./datacenter.png">
 <h3>- Assumption</h3>
+<p>I proposed two assumptions for this scenario. These two assumptions significantly reduce the problem's complexity, leading to a practical solution.</p>
 <p>1. Most firewall rules are configured reasonably. (Most people are good people :)</p>
-<p>2. A group of firewall rules should serve the same purpose. A single firewall rule can not satisfy the requirement of service. (People work in different groups)</p>
+<p>2. A single firewall rule can not satisfy the requirement of service. A group of firewall rules should serve the same purpose. (People stick together)</p>
 <h3>- Deduction</h3>
 <p>Here is the critical point.</p>
 <p><b>1. Firewall rules serving the same purpose should have the same spatial distribution in the datacenter.</b></p>
 <p><b>2. If a firewall rule is confirmed to be configured reasonably, another firewall rule that shares the same spatial distribution should also be considered as configured reasonably.</b></p>
 <h3>- Conclusion</h3>
-<p>We can use an unsupervised learning algorithm to automatically cluster firewall rules into groups based on their spatial distribution. After that, labeling the group is enough.</p>
+<p>We can use an unsupervised learning algorithm to cluster firewall rules into functional groups based on spatial distribution. After that, labeling the group is enough.</p>
 <h2>Algorithm & Result</h2>
 <h3>- Data representation</h3>
-<p>Each firewall rule will be represented by a vector that describes its spatial distribution.</p>
+<p>Each firewall rule is represented by a vector that describes its spatial distribution.</p>
 <img src="./vector.png">
-<p>Each element in the vector represents how many machines have this firewall rule in this location.</p>
-<p>(Machines' physical group defines a location. Each location has more than one machine.)</p>
+<p>Each element in the vector represents how many machines have this firewall rule in this location (virtual group).</p>
 <h3>- Clustering</h3>
 <p>By calculating the similarity of vectors, firewall rules can be clustered unsupervised.</p>
 <img src="./cluster.png">
-<p>Result of the similarity matrix. Yellow Triangles in the diagonal correspond to standard firewall rules. The red circle in the right picture represents outliers.</p>
+<p>Result of the similarity matrix. Each line or column represents a firewall rule. Large yellow Triangles on the diagonal correspond to standard firewall rules. Minor points in the diagonal are suspicious (outliers).</p>
 <img src="./sim_mat.png">
 <h3>- Result</h3>
-<p>I did not use the names of firewall rules in the algorithm. But firewall rules with similar names can be discovered by the algorithm. This proves that 1) standard firewall rules can be discovered in the form of groups. 2) abnormal firewall rules can be detected since they will be outliers.</p>
+<p>I did not use the names of firewall rules in the algorithm. But firewall rules with similar names can be discovered by the algorithm. This proves that we can find functional groups of firewall rules and outliers.</p>
 <img src="./result.png">
 
 <footer class="site-footer">
-<span class="site-footer-credits">This page was built based on <a href="https://pages.github.com/" target="_blank" style="color: blue;"><u>GitHub Pages</u></a> project.</span>
+<span class="site-footer-credits">This page was built based on the <a href="https://pages.github.com/" target="_blank" style="color: blue;"><u>GitHub Pages</u></a> project.</span>
 </footer>
 </main>
 </body></html>
