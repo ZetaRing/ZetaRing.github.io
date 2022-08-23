@@ -896,3 +896,22 @@ a:hover {
 .site-footer-credits {
     color: #819198
 }
+
+#navbar {
+    overflow: hidden;
+    background-color: rgb(255, 255, 255);
+    position: sticky;
+    top: 0;
+    width: 80px;
+    margin-left: auto; 
+    margin-right: 0;
+  }
+  
+#navbar a {
+float: left;
+display: block;
+color: #000000;
+text-align: center;
+padding: 14px;
+text-decoration: none;
+}
