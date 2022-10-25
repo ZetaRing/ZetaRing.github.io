@@ -898,20 +898,38 @@ a:hover {
 }
 
 #navbar {
-    overflow: hidden;
-    background-color: rgb(255, 255, 255);
-    position: sticky;
-    top: 0;
-    width: 80px;
-    margin-left: auto; 
-    margin-right: 0;
-  }
+overflow: hidden;
+background-color: rgb(255, 255, 255);
+position: sticky;
+top: 0;
+width: 80px;
+margin-left: auto; 
+margin-right: 0;
+}
   
 #navbar a {
 float: left;
 display: block;
 text-align: center;
-text-decoration: none;
 font-size: 1.5rem;
 text-decoration: underline;
+}
+
+.topnav {
+overflow: hidden;
+background-color: #333;
+}
+  
+.topnav a {
+float: left;
+color: #f2f2f2;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+font-size: 17px;
+}
+
+.topnav a:hover {
+background-color:#04AA6D;
+color: black;
 }
