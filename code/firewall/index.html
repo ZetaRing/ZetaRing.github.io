@@ -17,13 +17,13 @@
   </header>
 
   <div id="navbar">
-    <a href="../index.html">Home</a>
+    <a href="../index.html#MS">Home</a>
   </div>
 
 <main id="content" class="main-content" role="main">
-<h2>Background & Obstacle</h2>
+<h2>Background & Obstacles</h2>
 <p>1. There are more than one million firewall rules. Manually monitoring is impractical.</p>
-<p>2. The firewall rules in the datacenter are not unified. 
+<p>2. The firewall rules in the datacenter are not well-formed. 
 <p>&emsp; 1) There are some invalid firewall rules.</p>
 <p>&emsp; 2) Some teams will casually deploy their firewall rules.</p>
 <p>&emsp; 3) No one understands all firewall rules in the datacenter. It is hard to label all the firewall rules.</p>
@@ -35,7 +35,7 @@
 
 <h2>Solution</h2>
 <h3>- Observation</h3>
-<p>Machines in the datacenter can be described as virtual groups. As shown below, circles with different colors are different virtual groups. Each group has several machines, represented by triangles. Here we get the spatial distribution of machines.</p>
+<p>Machines in the datacenter can be described as virtual groups. As shown below, circles with different colors are different virtual groups. Each group has several machines, represented by triangles. Here we get the "spatial distribution of machines."</p>
 <p>However, virtual groups do not correspond to functional groups. Different teams can use machines in the same virtual groups for various purposes, represented by triangles with different colors. We call it the "functional distribution of machines."</p>
 <p>Unfortunately, we have no assessment of the functional distribution of machines. Only spatial distributions are available. In addition, we can figure out all the firewall rules deployed in each machine.</p>
 <img src="./datacenter.png">
@@ -49,7 +49,7 @@
 <p><b>2. If a firewall rule is confirmed to be configured reasonably, another firewall rule that shares the same spatial distribution should also be considered as configured reasonably.</b></p>
 <h3>- Conclusion</h3>
 <p>We can use an unsupervised learning algorithm to cluster firewall rules into functional groups based on spatial distribution. After that, labeling the group is enough.</p>
-<h2>Algorithm & Result</h2>
+<h2>Algorithm & Results</h2>
 <h3>- Data representation</h3>
 <p>Each firewall rule is represented by a vector that describes its spatial distribution.</p>
 <img src="./vector.png">

@@ -15,7 +15,7 @@
   </header>
 
   <div id="navbar">
-    <a href="../index.html">Home</a>
+    <a href="../index.html#MSRA">Home</a>
   </div>
 
 <main id="content" class="main-content" role="main">
@@ -30,7 +30,7 @@
 </video>
 
 <h2>Method</h2>
-<p>We almost changed all components in the PlaneNet, including backbone network, pyramid pooling, and implementation of convolution.</p>
+<p>We almost changed all components in the PlaneNet, including the backbone network, pyramid pooling, and implementation of convolution blocks.</p>
 <p>Original network structure from (C. Liu et al., CVPR, 2018):</p>
 <img src="./original.png">
 <p>Our structure:</p>
@@ -41,7 +41,7 @@
 <h2>Result</h2>
 <p>For indoor scenarios, most objects are artificial. There are always planes in man-made artifacts like desks, walls, and screens. As a result, we will focus on the accuracy of depth estimation of plane areas here.</p>
 <img src="./table.png">
-<p>As we can learn from the table, depth estimation accuracy drops slightly while computation cost is vastly reduced in our network.</p>
+<p>As we learn from the table, depth estimation accuracy drops slightly while computation cost is vastly reduced in our network.</p>
 <img src="./result.png">
 <p>Our network even out-performance PlaneNet in some cases, as shown above.</p>
 

@@ -15,7 +15,7 @@
   </header>
 
   <div id="navbar">
-    <a href="../index.html">Home</a>
+    <a href="../index.html#MSRA">Home</a>
   </div>
 
 <main id="content" class="main-content" role="main">
@@ -25,19 +25,19 @@
 </video>
 
 <h2>Target & Obstacle</h2>
-<p>Teams and Skype teams in Redmond have developed a neural network for semantic segmentation, which can segment a person out of the background in real-time. This model is designed for running on personal computers and mobile phones. We need to improve the performance of this model.</p>
+<p>Teams and Skype teams in Redmond have developed a neural network for semantic segmentation, which can segment a person out of the background in real time. This model is designed for running on personal computers and mobile phones. We need to improve the performance of this model.</p>
 <p>1. Model size and running time are strictly restrained. We need to increase IoU under limited computational resources.<br></p>
-<p>2. Original model is well-trained and finely modified. We do not have enough time and workforce to finetune a model. Consequently, our refinement method needs to be efficient enough to provide IoU improvement even without carefully selective parameters.<br></p>
+<p>2. Original model is well-trained and finely modified. We do not have enough time and workforce to finetune a model. Consequently, our refinement method needs to be efficient enough to provide IoU improvement even without carefully selected parameters.<br></p>
 <p>3. Original model is well-designed and highly compressed. We do not have much redundancy.</p>
 
 <h2>Knowledge Distillation</h2>
 <p>In Knowledge distillation (KD) (Hinton et al., NISP, 2014), the teacher is MobileNetV2 (Sandler et al., CVPR, 2018) with a width multiplier of 2.0, and the student is MobileNetV2 with a width multiplier of 0.5.</p>
 <img src="./kd.png">
-<p>Results are displayed below. X-axis: iterations. Y-axis: IoU on the test set.</p>
+<p>The results are displayed below. X-axis: iterations. Y-axis: IoU on the test set.</p>
 <img src="./kd_result.png">
 
 <h2>Cross Knowledge Distillation</h2>
-<p>We proposed cross-knowledge distillation (cross KD), inspired by KD. In cross KD, the student network is compelled to learn how to generate and decode the same feature extracted by the teacher network.</p>
+<p>We proposed cross-knowledge distillation (cross KD) inspired by KD. In cross KD, the student network is compelled to learn how to generate and decode the same feature extracted by the teacher network.</p>
 <img src="./cross_kd.png">
 <p>We found that cross KD can accelerate the speed of convergence significantly. However, the improvement of IoU is subtle under this scenario.</p>
 
@@ -60,6 +60,7 @@
 
 <h2>Pruning</h2>
 <p>On the red circle, we will prune the elements in the weight matrix. No pruning will occur for the green circle, and the network can "recover" during training.</p>
+<p>This training schema is in accord with the "Loss of Plasticity" theory proposed by Richard Sutton in <a href="https://www.youtube.com/watch?v=p_zknyfV9fY" target="_blank" style="color: blue;"><u>a talk in 2022</u></a>. However, we have applied it to practice in 2019.</p>
 <img src="./lr.png">
 <p>This network was trained on 4 x Tesla P40 for 117 hours.</p>
 <p>Weight sparsity: 0% -> ~40%</p>
